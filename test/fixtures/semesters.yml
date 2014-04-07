@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  position: 1
+  year: 1
+  season: MyString
+
+two:
+  position: 1
+  year: 1
+  season: MyString
