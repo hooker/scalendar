@@ -11,21 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140407024721) do
+ActiveRecord::Schema.define(version: 20140409024920) do
 
   create_table "available_times", force: true do |t|
     t.integer  "student_id"
     t.integer  "day_id"
     t.integer  "semester_id"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.integer  "start_time"
+    t.integer  "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "available_times", ["day_id"], name: "index_available_times_on_day_id", using: :btree
-  add_index "available_times", ["semester_id"], name: "index_available_times_on_semester_id", using: :btree
-  add_index "available_times", ["student_id"], name: "index_available_times_on_student_id", using: :btree
+  add_index "available_times", ["semester_id", "day_id", "student_id"], name: "index_available_times_on_semester_id_and_day_id_and_student_id", using: :btree
 
   create_table "days", force: true do |t|
     t.string   "name"
@@ -40,16 +38,14 @@ ActiveRecord::Schema.define(version: 20140407024721) do
     t.integer  "available_time_id"
     t.integer  "day_id"
     t.integer  "semester_id"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.integer  "start_time"
+    t.integer  "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "scheduled_times", ["available_time_id"], name: "index_scheduled_times_on_available_time_id", using: :btree
-  add_index "scheduled_times", ["day_id"], name: "index_scheduled_times_on_day_id", using: :btree
-  add_index "scheduled_times", ["semester_id"], name: "index_scheduled_times_on_semester_id", using: :btree
-  add_index "scheduled_times", ["student_id"], name: "index_scheduled_times_on_student_id", using: :btree
+  add_index "scheduled_times", ["semester_id", "day_id", "student_id"], name: "index_scheduled_times_on_semester_id_and_day_id_and_student_id", using: :btree
 
   create_table "semesters", force: true do |t|
     t.integer  "position"
@@ -61,9 +57,9 @@ ActiveRecord::Schema.define(version: 20140407024721) do
 
   create_table "students", force: true do |t|
     t.string   "name"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
   end
 
 end
